@@ -1,4 +1,4 @@
-import { useProducts } from '../context/ProductContext'
+import { useProducts } from "../context/ProductContext";
 
 function ProductsPage() {
   const products=useProducts();
