@@ -4,7 +4,14 @@ function ProductsPage() {
   const products=useProducts();
   console.log(products)
   return (
-    <div>ProductsPage</div>
+    <div>
+      <div>
+        {
+
+        }
+      </div>
+      <div>sidebar</div>
+    </div>
   )
 }
 
