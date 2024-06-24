@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.products{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
