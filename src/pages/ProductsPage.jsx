@@ -3,13 +3,17 @@ import styles from "../pages/ProductsPage.module.css"
 import Card from "../components/Card";
 import Loader from "../components/Loader"
 import { ImSearch } from "react-icons/im";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { FaListUl } from "react-icons/fa6";
 
 function ProductsPage() {
   const products=useProducts();
   console.log(products)
   const [search,setSearch]=useState("");
+  const [displayed,setDisplayed]=useState([]);
+  useEffect(()=>{
+setDisplayed(products)
+  },[products])
   const searchHandler=()=>{
     console.log("first")
   }
@@ -27,10 +31,10 @@ function ProductsPage() {
     </div>
        <div className={styles.container}>
         <div className={styles.products}>
-        {!products.length && <Loader/>}
+        {!displayed.length && <Loader/>}
         
         {
-products.map((p)=><Card key={p.id} data={p}/>)
+displayed.map((p)=><Card key={p.id} data={p}/>)
         }
        
        
