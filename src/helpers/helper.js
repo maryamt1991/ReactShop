@@ -14,4 +14,17 @@ if(!category) return products;
 const filteredProducts=products.filter(p=>p.category===category)
 return filteredProducts;
 }
-export {shortenText ,searchProducts, filterProducts}
+
+const createQueryObject=(currentQuery,newQuery)=>{
+if(newQuery.category==="all"){
+    const{category,...rest}=currentQuery;
+    return rest;
+}
+if(newQuery.search===""){
+    const{serach,...rest}=currentQuery;
+    return rest;
+}
+return{...newQuery,...currentQuery} 
+}
+
+export {shortenText ,searchProducts, filterProducts,createQueryObject}

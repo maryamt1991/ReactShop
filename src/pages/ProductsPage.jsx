@@ -5,7 +5,8 @@ import Loader from "../components/Loader"
 import { ImSearch } from "react-icons/im";
 import { useState,useEffect } from "react";
 import { FaListUl } from "react-icons/fa6";
-import { filterProducts, searchProducts } from "../helpers/helper";
+import { createQueryObject, filterProducts, searchProducts } from "../helpers/helper";
+import { useSearchParams } from "react-router-dom";
 
 function ProductsPage() {
   const products=useProducts();
@@ -13,22 +14,26 @@ function ProductsPage() {
   const [search,setSearch]=useState("");
   const [displayed,setDisplayed]=useState([]);
   const [query,setQuery]=useState({});
+  const [searchParams,setSearchParams]=useSearchParams();
   useEffect(()=>{
+    console.log(products)
 setDisplayed(products)
   },[products])
   useEffect(()=>{
+    console.log(query)
+    setSearchParams(query)
    let finalProducts=searchProducts(products,query.search);
    finalProducts=filterProducts(finalProducts,query.category);
    setDisplayed(finalProducts)
   },[query])
   const searchHandler=()=>{
-    setQuery((query)=>({...query,search}))
+    setQuery((query)=>createQueryObject(query,{search}))
   }
   const categoryHandler=(event)=>{
     const {tagName}=event.target;
     const category=event.target.innerText.toLocaleLowerCase();
     if (tagName!=="LI") return ;
-    setQuery((query)=>({...query,category}))
+    setQuery((query)=>createQueryObject(query,{category}))
   }
   return (
     <>
@@ -53,8 +58,8 @@ displayed.map((p)=><Card key={p.id} data={p}/>)
         </div>
         <ul onClick={categoryHandler}>
           <li>All</li>
-          <li>Elecrtonics</li>
-          <li>jewelry</li>
+          <li>Electronics</li>
+          <li>jewelery</li>
           <li>Men's Clothing</li>
           <li>women's Clothing</li>
         </ul>
