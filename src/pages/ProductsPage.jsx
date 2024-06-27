@@ -15,19 +15,15 @@ function ProductsPage() {
   const [displayed,setDisplayed]=useState([]);
   const [query,setQuery]=useState({});
   const [searchParams,setSearchParams]=useSearchParams();
-  useEffect(()=>{
+   useEffect(()=>{
 setDisplayed(products)
-
 setQuery(getInitialQuery(searchParams));
-//console.log(getInitialQuery(searchParams));
   },[products])
   useEffect(()=>{
         setSearchParams(query)
         setSearch(query.search)
    let finalProducts=searchProducts(products,query.search);
    finalProducts=filterProducts(finalProducts,query.category);
-   //console.log(finalProducts)
-   //console.log(query.category)
    setDisplayed(finalProducts)
   },[query])
   
@@ -42,9 +38,7 @@ setQuery(getInitialQuery(searchParams));
         {
 displayed.map((p)=><Card key={p.id} data={p}/>)
         }
-       
-       
-      </div>
+       </div>
       <SideBar setQuery={setQuery}/>
     </div>
     </>

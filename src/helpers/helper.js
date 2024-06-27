@@ -24,13 +24,13 @@ if(newQuery.search===""){
     const{serach,...rest}=currentQuery;
     return rest;
 }
-return{...newQuery,...currentQuery} 
+return{...currentQuery, ...newQuery} 
 }
 
  const getInitialQuery=(searchParams)=>{
     const query={};
 const category=searchParams.get("category")
-console.log(category)
+
 const search=searchParams.get("search")
 if(category)
      {
