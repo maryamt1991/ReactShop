@@ -39,7 +39,7 @@ setQuery(getInitialQuery(searchParams));
 displayed.map((p)=><Card key={p.id} data={p}/>)
         }
        </div>
-      <SideBar setQuery={setQuery}/>
+      <SideBar query={query} setQuery={setQuery}/>
     </div>
     </>
   )
