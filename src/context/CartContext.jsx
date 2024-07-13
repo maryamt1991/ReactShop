@@ -22,7 +22,46 @@ const reducer=(state,action)=>{
                 checkout:false,
                 ...sumProducts(state.selectedItems),
                 
+            };
+            case "REMOVE-ITEM":{
+                const newSelectedItems=state.selectedItems.filter(
+                    (item)=>item.id !==action.payload.id);
+                return {
+                    ...state,
+                    selectedItems:[...newSelectedItems],
+                    ...sumProducts(newSelectedItems),
+                }
             }
+                case "INCREASE":
+                    {
+                    const increaseIndex=state.selectedItems.findIndex(
+                        (item)=>item.id===action.payload.id
+                    );
+                    state.selectedItems[increaseIndex].quantity++;
+                    return{
+                        ...state,
+                        ...sumProducts(state.selectedItems),
+                    }
+                }
+                    case "DECREASE":
+                        {
+                        const decreseIndex=state.selectedItems.findIndex(
+                            (item)=>item.id===action.payload.id
+                        );
+                        state.selectedItems[decreseIndex].quantity--;
+                        return{
+                            ...state,
+                            ...sumProducts(state.selectedItems),
+                        }
+                    }
+                        case "CHECKOUT":
+                            return{
+                                selectedItems:[],
+                                itemsCounter:0,
+                                total:0,
+                                checkout:true,  
+                            }
+
            
     
         default:
